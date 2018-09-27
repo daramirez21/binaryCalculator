@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1538005731 source:c:\.test\test 9\main.cpp
+	<iostream>
+	<stdlib.h>
+
+1537885221 source:c:\.test\test 9\calc.cpp
+	<iostream>
+	<stdlib.h>
+
+1537968395 c:\.test\test 9\calc.cpp
+
