@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
-1538005731 source:c:\.test\test 9\main.cpp
+1538051302 source:c:\.test\test 9\main.cpp
 	<iostream>
 	<stdlib.h>
+	<sstream>
 
 1537885221 source:c:\.test\test 9\calc.cpp
 	<iostream>
