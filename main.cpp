@@ -1,159 +1,215 @@
 #include <iostream>
 #include <stdlib.h>
 #include <sstream>
+#include <string>
+#include <bitset>
 
 using std::cin;
 using std::cout;
 using std::endl;
 using std::stringstream;
 using std::string;
+using std::bitset;
 
-void mainMenu(char level);
-void returnMenu(char choice);
-void binConvMenu(char subLevel);
-void subMenu2(char subLevel);
-void subMenu3(char subLevel);
-void exit();
+void mainMenu(string level);
+void binConvMenu(string subLevel);
+void subMenu2(string subLevel);
+void subMenu3(string subLevel);
+int exit();
 
 long convDec2Bin(int num);
 long convBin2Dec(int num);
 
-
-
-
 int main()
 {
-    mainMenu('0');
+    mainMenu("0");
+
 }
 
 
-void mainMenu(char level)
+void mainMenu(string level)
 {
     system("CLS");
-    if (level == '0'){
+    if (level == "0"){
         do{
             cout << "Main Menu\n\n"
                     "1 Binary Converter\n" // ?
                     "2 Binary Calculator\n"
                     "3 Binary to ASCII Converter\n"
-                    "4 Exit\n"
+                    "(q) Quit\n"
                     ">> ";
             cin >> level;
             system("CLS");
-        }while(level != '1' && level != '2' && level != '3' && level != '4');
+        } while (level != "1" && level != "2" && level != "3" && level != "q");
 
-        switch (level){
-        case '1':
-            binConvMenu('0');
-            break;
-
-        case '2':
-            subMenu2('0');
-            break;
-
-        case '3':
-            subMenu3('0');
-            break;
-
-        case '4':
+        if (level == "1"){
+            binConvMenu("0");
+        }
+        else if (level == "2"){
+            subMenu2("0");
+        }
+        else if (level == "3"){
+            subMenu3("0");
+        }
+        else if (level == "q"){
             exit();
         }
-    }else{exit();}
+        else {
+            cout << "You shouldn't be here!" << endl;
+        }
+    }
+    else {
+            cout << "You shouldn't be here!" << endl;
+    }
 }
 
-void binConvMenu(char subLevel)
+void binConvMenu(string subLevel)
 {
-    int num = 0, bin = 0;
-    char choice;
-    string strChoice;
-    system("CLS");
-    if (subLevel == '0'){
+    int num = 0, bin = 0, deci = 0;
+    string choice;
+
+    if (subLevel == "0"){
+        system("CLS");
         do{
             cout << "You are in: Binary Converter\n"
                     "What do you want to convert?\n\n"
                     "1 Decimal to Binary\n"
-                    "2 Binary to Decimal\n\n"
+                    "2 Binary to Decimal\n"
                     "(r) Return to Main Menu\n"
                     ">> ";
             cin >> subLevel;
             system("CLS");
-        }while(subLevel != '1' && subLevel != '2' && subLevel != '3' && subLevel != 'r');
+        } while (subLevel != "1" && subLevel != "2" && subLevel != "3" && subLevel != "r");
 
-        switch(subLevel){
-        case '1':
-
-            do{
+        while (subLevel == "1"){
+            system("CLS");
+            do {
                 cout << "Decimal to Binary\n\n"
-                        "Enter a number to convert\n"
-                        "(e) return to previous menu.\n"
-                        "(r) return to main menu\n"
+                        "Enter a number to convert in binary\n"
+                        "(e) Return to Previous Menu\n"
+                        "(r) Return to Main Menu\n"
                         ">> ";
-                cin >> strChoice;
-                    if (strChoice != "e" && strChoice != "r"){
-                        stringstream toInt(strChoice);
+                cin >> choice;
+                    if (choice != "e" && choice != "r"){
+                        stringstream toInt(choice);
                         toInt >> num;
                     }
+                    else {
+                        cout << "You shouldn't be here!" << endl;
+                    }
                 system("CLS");
-                }while(strChoice != "e" && num <= 1 && strChoice != "r");
+                } while (choice != "e" && num <= 0 && choice != "r");
 
-            if (strChoice == "e"){
-                binConvMenu('0');
+            if (choice == "e"){
+                binConvMenu("0");
             }
-            else if (strChoice == "r"){
-                mainMenu('0');
+            else if (choice == "r"){
+                mainMenu("0");
             }
-            else{
+            else {
+                system("CLS");
                 bin = convDec2Bin(num);
                 cout << "\n\n" << num << " decimal is equal to " << bin << " in binary\n\n" << endl;
-                if (bin > 0){
-                    do{
-                        cout << "What do you want to do?\n"
-                                "(e) Convert Again\n"
-                                "(r) Return to Main Menu\n"
-                                "(q) Quit\n"
-                                ">> ";
-                        cin >> choice;
-                        system("CLS");
-                    } while (choice != 'e' && choice != 'r' && choice != 'q');
+                do{
+                    cout << "What do you want to do?\n"
+                            "(t) Convert Again\n"
+                            "(e) Return to Binary Converter Menu\n"
+                            "(r) Return to Main Menu\n"
+                            "(q) Quit\n"
+                            ">> ";
+                    cin >> choice;
+                    system("CLS");
+                } while (choice != "t" && choice != "e" && choice != "r" && choice != "q");
 
-                    switch (choice){
-                    case 'e':
-                        binConvMenu('0');
-                        break;
-
-                    case 'r':
-                        mainMenu('0');
-                        break;
-
-                    case 'q':
-                        exit();
-                        break;
-
-                    default:
-                        cout << "You shouldn't be here!" << endl;
-                        break;
-                    }
+                if (choice == "t"){
+                    binConvMenu("1");
                 }
-                else{
+                else if (choice == "e"){
+                    binConvMenu("0");
+                }
+                else if (choice == "r"){
+                    mainMenu("0");
+                }
+                else if (choice == "q"){
                     exit();
                 }
+                else {
+                    cout << "You shouldn't be here!" << endl;
+                }
             }
-            break;
-
-        case '2':
-            exit();
-            break;
-
-        case 'r':
-            returnMenu('r');
-            break;
         }
+
+        while (subLevel == "2"){
+            system("CLS");
+            do {
+                cout << "Binary to Decimal\n\n"
+                        "Enter a number to convert in decimal\n"
+                        "(e) Return to Previous Menu\n"
+                        "(r) Return to Main Menu\n"
+                        ">> ";
+                cin >> choice;
+                    if (choice != "e" && choice != "r"){
+                        stringstream toInt(choice);
+                        toInt >> num;
+                    }
+                    else {
+                        cout << "You shouldn't be here!" << endl;
+                    }
+                system("CLS");
+                } while (choice != "e" && num <= 0 && choice != "r");
+
+            if (choice == "e"){
+                binConvMenu("0");
+            }
+            else if (choice == "r"){
+                mainMenu("0");
+            }
+            else {
+                system("CLS");
+                deci = convBin2Dec(num);
+                cout << "\n\n" << num << " decimal is equal to " << deci << " in decimal\n\n" << endl;
+                do{
+                    cout << "What do you want to do?\n"
+                            "(t) Convert Again\n"
+                            "(e) Return to Binary Converter Menu\n"
+                            "(r) Return to Main Menu\n"
+                            "(q) Quit\n"
+                            ">> ";
+                    cin >> choice;
+                    system("CLS");
+                } while (choice != "t" && choice != "e" && choice != "r" && choice != "q");
+
+                if (choice == "t"){
+                    binConvMenu("2");
+                }
+                else if (choice == "e"){
+                    binConvMenu("0");
+                }
+                else if (choice == "r"){
+                    mainMenu("0");
+                }
+                else if (choice == "q"){
+                    exit();
+                }
+                else {
+                    cout << "You shouldn't be here!" << endl;
+                }
+            }
+        }
+
+        while (subLevel == "r"){
+            mainMenu("0");
+        }
+    }
+
+    else {
+        cout << "You shouldn't be here!" << endl;
     }
 }
 
-void subMenu2(char subLevel)
+void subMenu2(string subLevel)
 {
-    if (subLevel == '0'){
+    if (subLevel == "0"){
         do{
             cout << "You are in: Binary Calculator\n"
                     "What do you want to calculate?\n\n"
@@ -163,35 +219,29 @@ void subMenu2(char subLevel)
                     ">> ";
             cin >> subLevel;
             system("CLS");
-        }while(subLevel != '1' && subLevel != '2' && subLevel != '3' && subLevel != 'r');
+        } while (subLevel != "1" && subLevel != "2" && subLevel != "3" && subLevel != "r");
 
-        switch(subLevel){
-        case '1':
+        if (subLevel == "1"){
             exit();
-            break;
-
-        case '2':
+        }
+        else if (subLevel == "2"){
             exit();
-            break;
-
-        case '3':
+        }
+        else if (subLevel == "3"){
             exit();
-            break;
-
-        case 'r':
-            returnMenu('r');
-            break;
-
-        default:
+        }
+        else if (subLevel == "r"){
+            mainMenu("0");
+        }
+        else {
             cout << "You shouldn't be here!" << endl;
-            break;
         }
     }
 }
 
-void subMenu3(char subLevel)
+void subMenu3(string subLevel)
 {
-    if (subLevel == '0'){
+    if (subLevel == "0"){
         do{
             cout << "You are in: Binary to ASCII Converter\n"
                     "What do you want to convert?\n\n"
@@ -201,35 +251,23 @@ void subMenu3(char subLevel)
                     ">> ";
             cin >> subLevel;
             system("CLS");
-        }while(subLevel != '1' && subLevel != '2' && subLevel != '3' && subLevel != 'r');
+        } while (subLevel != "1" && subLevel != "2" && subLevel != "3" && subLevel != "r");
 
-        switch(subLevel){
-        case '1':
+        if (subLevel == "1"){
             exit();
-            break;
-
-        case '2':
-            exit();
-            break;
-
-        case '3':
-            returnMenu('r');
-            break;
-
-        default:
-            cout << "You shouldn't be here!" << endl;
-            break;
         }
-    }
-}
-
-void returnMenu(char choice)
-{
-    if (choice == 'r'){ // if user chose to back to main mainMenu
-        mainMenu('0');
-    }
-    else if (choice == 'q'){ // if user chose to quit the program
-        exit();
+        else if (subLevel == "2"){
+            exit();
+        }
+        else if (subLevel == "3"){
+            exit();
+        }
+        else if (subLevel == "r"){
+            mainMenu("0");
+        }
+        else {
+            cout << "You shouldn't be here!" << endl;
+        }
     }
 }
 
@@ -238,7 +276,7 @@ long convDec2Bin(int num){
     long binNum = 0;
     int rem, i = 1;
 
-    while(num > 0){
+    while (num > 0){
         rem = num % 2;
         num = num / 2;
         binNum = binNum + rem * i;
@@ -252,7 +290,7 @@ long convBin2Dec(int num){
     long decNum = 0;
     int rem, b = 1;
 
-    while(num > 0){
+    while (num > 0){
         rem = num % 10;
         decNum = decNum + rem * b;
         b = b * 2;
@@ -261,10 +299,11 @@ long convBin2Dec(int num){
     return num;
 }
 
-void exit()
+int exit()
 {
     system("CLS");
         cout << "=============" << endl;
         cout << "= Exiting...=" << endl;
         cout << "=============" << endl;
+    return 0;
 }

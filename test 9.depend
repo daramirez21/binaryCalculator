@@ -1,8 +1,10 @@
 # depslib dependency file v1.0
-1538051302 source:c:\.test\test 9\main.cpp
+1538278262 source:c:\.test\test 9\main.cpp
 	<iostream>
 	<stdlib.h>
 	<sstream>
+	<string>
+	<bitset>
 
 1537885221 source:c:\.test\test 9\calc.cpp
 	<iostream>
